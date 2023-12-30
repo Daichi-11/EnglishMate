@@ -11,40 +11,36 @@
 </head>
 <body>
   
-<header>
-  {% if user.is_authenticated %}
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand text-primary fs-3" href="{% url 'home' %}">EnglishMate</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-          </li>
-        
-        <li class="nav-item">
-          <a href="#" class="btn btn-outline-info me-2">Logout</a>
-        </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  {% else %}
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand text-primary fs-3" href="#">EnglishMate</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
-        <div class="d-flex">
-          <a href="#" class="btn btn-outline-info me-2">Login</a>
-          <a href="#" class="btn btn-info">Sign Up</a>
+  <header>
+    {% if user.is_authenticated %}
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand text-primary fs-3" href="{% url 'home' %}">EnglishMate</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'logout' %}" class="btn btn-outline-info me-2">Logout</a>
+            </li>
+          </ul>
         </div>
-      </div>
-    </div>
-  </nav>
-  {% endif %}
-</header>
-
+      </nav>
+    {% else %}
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand text-primary fs-3" href="#">EnglishMate</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+          <div class="d-flex">
+            <a href="{% url 'login' %}" class="btn btn-outline-info me-2">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-info">Sign Up</a>
+          </div>
+        </div>
+      </nav>
+    {% endif %}
+  </header>
+  
 
 
   {% block content %}
