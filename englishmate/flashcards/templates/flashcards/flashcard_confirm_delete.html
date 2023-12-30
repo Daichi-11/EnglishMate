@@ -1,0 +1,11 @@
+<!-- templates/flashcards/flashcard_confirm_delete.html -->
+{% extends 'tops/base.html' %}
+
+{% block content %}
+  <h2>Are you sure you want to delete "{{ flashcard.front_definition }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+  </form>
+  <a href="{% url 'flashcard_list' %}">No, cancel</a>
+{% endblock %}

@@ -1,0 +1,4 @@
+.custom-image {
+  width: 2000px; /* Set the maximum width to the container's width */
+  height: 600px;    /* Let the height adjust proportionally */
+}

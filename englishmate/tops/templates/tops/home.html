@@ -1,7 +1,42 @@
-{% extends "tops/base.html" %}
+{% extends 'tops/base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/top.css' %}">
 
+{% if user.is_authenticated %}
+
+
+
+<!-- templates/flashcards/flashcard_list.html -->
+<a href="{% url 'flashcard_create' %}">Create Flash Card</a>
+<!-- templates/flashcards/flashcard_confirm_delete.html -->
+<a href="{% url 'flashcard_list' %}">list</a>
+
+
+
+
+
+
+{% else %}
+
+<img src="{% static 'img/top.png' %}" class="img-fluid custom-image" alt="...">
+<div class="service">
+  <h1><p class="text-center">EnglishMate</p></h1>
+  <p class="text-center">EnglishMate is the learning English vocabraly service<br>Surpport your English learning</p>
+</div>
+<img src="{% static 'img/top.png' %}" class="img-fluid custom-image" alt="...">
+
+<div class="service">
+  <h1><p class="text-center">How to Use EnglishMate</p></h1>
+  <p class="text-center">Step1: create flashcards which you want to memorize <br>Step2:</p>
+</div>
+<img src="{% static 'img/top.png' %}" class="img-fluid custom-image" alt="...">
+
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a class="btn btn-info" href="#" role="button">Getting started</a>
+</div>
+
+{% endif %}
 
 
 {% endblock content %}
