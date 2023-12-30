@@ -1,0 +1,12 @@
+<!-- templates/flashcards/flashcard_list.html -->
+{% extends 'tops/base.html' %}
+
+{% block content %}
+  <h2>Flash Cards</h2>
+  <ul>
+    {% for flashcard in flashcards %}
+      <li><a href="{% url 'flashcard_detail' pk=flashcard.pk %}">{{ flashcard.front_definition }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'flashcard_create' %}">Add Flash Card</a>
+{% endblock %}

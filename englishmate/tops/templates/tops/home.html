@@ -1,7 +1,19 @@
-{% extends "tops/base.html" %}
+{% extends 'tops/base.html' %}
 {% load static %}
 {% block content %}
 
+{% if user.is_authenticated %}
+
+
+
+<!-- templates/flashcards/flashcard_list.html -->
+<a href="{% url 'flashcard_create' %}">Create Flash Card</a>
+<!-- templates/flashcards/flashcard_confirm_delete.html -->
+<a href="{% url 'flashcard_list' %}">list</a>
+
+{% else %}
+
+{% endif %}
 
 
 {% endblock content %}

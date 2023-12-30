@@ -1,0 +1,27 @@
+<!-- templates/flashcards/flashcard_detail.html -->
+{% extends 'tops/base.html' %}
+
+{% block content %}
+  <h2>{{ flashcard.front_definition }}</h2>
+  <div id="flashcard" class="card">
+    <div class="front">
+      <img src="{{ flashcard.front_image.url }}" alt="Front Image">
+      <p>{{ flashcard.front_definition }}</p>
+    </div>
+    <div class="back">
+      <img src="{{ flashcard.back_image.url }}" alt="Back Image">
+      <p>{{ flashcard.back_word }}</p>
+    </div>
+  </div>
+  <a href="{% url 'flashcard_list' %}">Back to Flash Cards</a>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const flashcard = document.getElementById('flashcard');
+    flashcard.addEventListener('click', function () {
+      flashcard.classList.toggle('flipped');
+    });
+  </script>
+{% endblock %}
+

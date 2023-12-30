@@ -30,7 +30,7 @@
     {% else %}
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand text-primary fs-3" href="#">EnglishMate</a>
+          <a class="navbar-brand text-primary fs-3" href="{% url 'home' %}">EnglishMate</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
           <div class="d-flex">
             <a href="{% url 'login' %}" class="btn btn-outline-info me-2">Login</a>
@@ -40,7 +40,7 @@
       </nav>
     {% endif %}
   </header>
-  
+
 
 
   {% block content %}
