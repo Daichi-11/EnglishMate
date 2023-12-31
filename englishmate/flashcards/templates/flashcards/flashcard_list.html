@@ -1,16 +1,39 @@
 {% extends 'tops/base.html' %}
 
 {% block content %}
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
 <section class="my-4" style="height: 500px;">
-  <h2>Flash Cards</h2>
+  <h1 class="text-center">Flashcard Lists</h1>
   <ul>
     {% for flashcard in flashcards %}
-      <li><a href="{% url 'flashcard_detail' pk=flashcard.pk %}">{{ flashcard.front_definition }}</a></li>
+      <li><a href="{% url 'flashcard_detail' pk=flashcard.pk %}">{{ flashcard.definition }}</a></li>
     {% endfor %}
   </ul>
-  <a href="{% url 'flashcard_create' %}">Add Flash Card</a>
+  
 
-</section>
+
+
+  <div class="d-flex justify-content-center">
+    {% for flashcard in flashcards %}
+    <div class="card mb-3 me-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ flashcard.image.url }}" class="img-fluid rounded-start" alt="{{ flashcard.word }} Image">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ flashcard.word }}</h5>
+            <p class="card-text"><a href="#">{{ flashcard.definition }}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="d-flex justify-content-center">
+  <a href="{% url 'flashcard_create' %}" class="btn btn-info" tabindex="-1" role="button">Add Flashcard</a>
+  
+  </div>
   
 {% endblock %}
