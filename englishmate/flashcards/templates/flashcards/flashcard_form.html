@@ -2,16 +2,65 @@
 {% extends 'tops/base.html' %}
 
 {% block content %}
-<br><br><br><br><br><br><br><br>
-<section class="my-4" style="height: 500px;">
-  
-
 </section>
-  <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Flash Card</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-  </form>
-  <a href="{% url 'flashcard_list' %}">Cancel</a>
+
+<section class="vh-100" style="background-color: #508bfc;">
+  <br>
+  <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                  <div class="card-body p-5 text-center">
+                      <h2 class="card-title text-center mb-4">Create Flashcard</h2>
+                      <form method="post" class="text-start"  enctype="multipart/form-data">
+                          {% csrf_token %}
+
+                          <div class="row">
+                              <div class="col-md-6 offset-md-3">
+                                  <div class="mb-4">
+                                      <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
+                                      {{ form.image }}
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-6 offset-md-3">
+                                  <div class="mb-4">
+                                      <label for="{{ form.definition.id_for_label }}" class="form-label">Definition</label>
+                                      {{ form.definition }}
+                                  </div>
+                              </div>
+                          </div>
+
+
+                          <div class="row">
+                              <div class="col-md-6 offset-md-3">
+                                  <div class="mb-4">
+                                      <label for="{{ form.word.id_for_label }}" class="form-label">Word</label>
+                                      {{ form.word }}
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="d-grid gap-2 col-6 mx-auto">
+                              <button class="btn btn-info text-white" type="submit">Save</button>
+                          </div>
+
+                          <hr class="my-4">
+
+                          <div>
+                              <br>
+                              <p class="text-black text-center">Want to see your flashcards?<a href="{% url 'flashcard_list' %}" class="">Flashcard List</a></p>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
 {% endblock %}
