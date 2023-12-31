@@ -33,7 +33,8 @@ SECRET_KEY = env.str(
 DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["englishmate.fly.dev", "localhost", "127.0.0.1"]
-CSRF_TRUSTED_ORIGINS = ["https://englishmate.fly.dev/"]
+CSRF_TRUSTED_ORIGINS = ["https://englishmate.fly.dev"]
+
 
 # Application definition
 

@@ -4,15 +4,37 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles/top.css' %}">
 
 {% if user.is_authenticated %}
-<br><br><br>
+<br><br><br><br><br><br><br><br>
+<section class="my-4" style="height: 500px;">
+  <h1 class="text-center">Start Your Learning</h1>
 
+  <div class="d-flex justify-content-center">
+    <a href="" class="btn btn-warning me-3">Practice</a>
+    <a href="{% url 'flashcard_create' %}" class="btn btn-info">Make Flashcards</a>
+  </div>
+  <br><br><br><br>
 
-<!-- templates/flashcards/flashcard_list.html -->
-<a href="{% url 'flashcard_create' %}">Create Flash Card</a>
-<!-- templates/flashcards/flashcard_confirm_delete.html -->
-<a href="{% url 'flashcard_list' %}">list</a>
+  <h1 class="text-center">Your Flashcards</h1>
 
+<di class="d-flex justify-content-center">
+  {% for flashcard in flashcards %}
+  <div class="card mb-3 me-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{% static 'img/top.png' %}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ flashcard.back_word }}</h5>
+          <p class="card-text"><a href="#">{{ flashcard.front_definition }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
+</section>
 
 
 

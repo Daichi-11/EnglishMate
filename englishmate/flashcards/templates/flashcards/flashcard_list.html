@@ -1,7 +1,8 @@
-<!-- templates/flashcards/flashcard_list.html -->
 {% extends 'tops/base.html' %}
 
 {% block content %}
+<br><br><br><br><br><br><br><br>
+<section class="my-4" style="height: 500px;">
   <h2>Flash Cards</h2>
   <ul>
     {% for flashcard in flashcards %}
@@ -9,4 +10,7 @@
     {% endfor %}
   </ul>
   <a href="{% url 'flashcard_create' %}">Add Flash Card</a>
+
+</section>
+  
 {% endblock %}
