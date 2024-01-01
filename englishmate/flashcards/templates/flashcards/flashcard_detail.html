@@ -2,31 +2,14 @@
 {% extends 'tops/base.html' %}
 
 {% block content %}
-<br><br><br><br><br><br><br><br>
-<section class="my-4" style="height: 500px;">
-  
 
-</section>
-  <h2>{{ flashcard.front_definition }}</h2>
-  <div id="flashcard" class="card">
-    <div class="front">
-      <img src="{{ flashcard.front_image.url }}" alt="Front Image">
-      <p>{{ flashcard.front_definition }}</p>
-    </div>
-    <div class="back">
-      <img src="{{ flashcard.back_image.url }}" alt="Back Image">
-      <p>{{ flashcard.back_word }}</p>
-    </div>
+<div class="card w-96 bg-base-100 shadow-xl ">
+  <figure><img src="{{ flashcard.image.url }}" alt="Shoes" /></figure>
+  <div class="card-body">
+    <h2 class="card-title">{{ flashcard.word }}</h2>
+    <p>{{ flashcard.definition }}</p>
   </div>
-  <a href="{% url 'flashcard_list' %}">Back to Flash Cards</a>
-{% endblock %}
+</div>
 
-{% block scripts %}
-  <script>
-    const flashcard = document.getElementById('flashcard');
-    flashcard.addEventListener('click', function () {
-      flashcard.classList.toggle('flipped');
-    });
-  </script>
 {% endblock %}
 
