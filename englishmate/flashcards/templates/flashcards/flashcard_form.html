@@ -1,66 +1,48 @@
 <!-- templates/flashcards/flashcard_form.html -->
 {% extends 'tops/base.html' %}
-
+{% load static %}
 {% block content %}
-</section>
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">Add Your Flashcard</h2>
+    </div>
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-6" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+        <label for="word" class="block text-sm font-medium leading-6">Word</label>
+        <div class="mt-2">
+        <input id="word" name="word" type="text" autocomplete="word" required
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        </div>
+        </div>
 
-<section class="vh-100" style="background-color: #508bfc;">
-  <br>
-  <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                  <div class="card-body p-5 text-center">
-                      <h2 class="card-title text-center mb-4">Create Flashcard</h2>
-                      <form method="post" class="text-start"  enctype="multipart/form-data">
-                          {% csrf_token %}
+        <div>
+        <label for="definition" class="block text-sm font-medium leading-6">Definition</label>
+        <div class="mt-2">
+            <textarea class="textarea textarea-bordered" placeholder="Definition" id="definition" name="definition" required></textarea>
+        </div>
+        </div>
+        <div>
+        <label for="image" class="block text-sm font-medium leading-6 ">Image</label>
+        <div class="mt-2">
+            <input id="image" name="image" type="file" class="file-input file-input-bordered file-input-primary w-full max-w-xs" />
+        </div>
+        </div>
 
-                          <div class="row">
-                              <div class="col-md-6 offset-md-3">
-                                  <div class="mb-4">
-                                      <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
-                                      {{ form.image }}
-                                  </div>
-                              </div>
-                          </div>
+        <div>
+        <button type="submit"
+                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        Save
+        </button>
+        </div>
+    </form>
 
-                          <div class="row">
-                              <div class="col-md-6 offset-md-3">
-                                  <div class="mb-4">
-                                      <label for="{{ form.definition.id_for_label }}" class="form-label">Definition</label>
-                                      {{ form.definition }}
-                                  </div>
-                              </div>
-                          </div>
-
-
-                          <div class="row">
-                              <div class="col-md-6 offset-md-3">
-                                  <div class="mb-4">
-                                      <label for="{{ form.word.id_for_label }}" class="form-label">Word</label>
-                                      {{ form.word }}
-                                  </div>
-                              </div>
-                          </div>
-
-                          <div class="d-grid gap-2 col-6 mx-auto">
-                              <button class="btn btn-info text-white" type="submit">Save</button>
-                          </div>
-
-                          <hr class="my-4">
-
-                          <div>
-                              <br>
-                              <p class="text-black text-center">Want to see your flashcards?<a href="{% url 'flashcard_list' %}" class="">Flashcard List</a></p>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-
-
-
+    <p class="mt-10 text-center text-sm text-gray-500">
+        Go to Flashcard List
+        <a href="{% url 'flashcard_list' %}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">List</a>
+    </p>
+    </div>
+</div>
 {% endblock %}
