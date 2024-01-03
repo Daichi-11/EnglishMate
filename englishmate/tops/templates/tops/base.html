@@ -8,6 +8,7 @@
   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
   <title>{% block title %}EnglishMate{% endblock title %}</title>
 </head>
 <body>
@@ -27,11 +28,17 @@
           <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
               <div class="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                {% if user.userprofile.profile_picture %}
+                <img class="w-40 h-40 mb-3 rounded-full shadow-lg"
+                    src="{{ user.userprofile.profile_picture.url }}" alt="User image"/>
+                {% else %}
+                <img class="w-40 h-40 mb-3 rounded-full shadow-lg"
+                    src="{% static 'img/defaultuser.jpg' %}" alt="Default user image"/>
+                {% endif %}
               </div>
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-32">
-              <li><a>Profile</a></li>
+              <li><a href="{% url 'profile' %}">Profile</a></li>
               <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
           </div>
@@ -72,6 +79,7 @@
     </nav>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
   {% block javascripts %}{% endblock javascripts %}
 </body>
 </html>
