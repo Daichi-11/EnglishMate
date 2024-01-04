@@ -2,6 +2,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import FlashCard
 from .forms import FlashCardForm
+from PyDictionary import PyDictionary
 
 def flashcard_list(request):
     flashcards = FlashCard.objects.all()
@@ -41,3 +42,24 @@ def flashcard_delete(request, pk):
         return redirect('flashcard_list')
 
     return render(request, 'flashcards/flashcard_confirm_delete.html', {'flashcard': flashcard})
+
+
+
+def dictionary(request):
+    word_searched = request.GET.get('word_searched', '')
+    word_def = None
+
+    try:
+        if word_searched:
+            dictionary = PyDictionary()
+            meanings = dictionary.meaning(word_searched)
+
+            if meanings:
+                word_def = meanings[list(meanings.keys())[0]][0]
+            else:
+                word_def = 'Meaning not found for the word'
+    except Exception as e:
+        word_def = f"An error occurred: {str(e)}"
+
+    context = {'word_searched': word_searched, 'word_def': word_def}
+    return render(request, 'flashcards/dictionary.html', context)

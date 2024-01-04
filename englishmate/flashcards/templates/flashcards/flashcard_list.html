@@ -3,16 +3,31 @@
 {% block content %}
 
 <h1 class="text-center text-4xl">Your Flashcards</h1>
-<div class="flex flex-wrap justify-center">
-  {% for flashcard in flashcards %}
-    <div class="card w-96 bg-base-100 shadow-xl m-4">
-      <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-      <div class="card-body">
-        <h2 class="card-title">{{ flashcard.word }}</h2>
-        <p><a href="{% url 'flashcard_detail' pk=flashcard.pk %}">{{ flashcard.definition }}</a></p>
-      </div>
-    </div>
-  {% endfor %}
+
+
+
+<div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Word</th>
+        <th>Definition</th>
+        <th>Sentence</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for flashcard in flashcards %}
+      <tr>
+        <th>{{ forloop.counter }}</th>
+        <td>{{ flashcard.word }}</td>
+        <td>{{ flashcard.definition }}</td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 <div class="flex justify-center py-8">
   <a href="{% url 'flashcard_create' %}" class="btn btn-info" tabindex="-1" role="button">Add Flashcard</a>
