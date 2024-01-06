@@ -1,8 +1,27 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import FlashCard
-from .forms import FlashCardForm
+from .models import FlashCard, Deck
+from .forms import FlashCardForm, DeckForm
 from PyDictionary import PyDictionary
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def deck_list(request):
+    decks = Deck.objects.filter(user=request.user)
+    return render(request, 'decks/deck_list.html', {'decks': decks})
+
+@login_required
+def add_deck(request):
+    if request.method == 'POST':
+        form = DeckForm(request.POST)
+        if form.is_valid():
+            deck = form.save(commit=False)
+            deck.user = request.user
+            deck.save()
+            return redirect('deck_list')
+    else:
+        form = DeckForm()
+    return render(request, 'decks/add_deck.html', {'form': form})
 
 def flashcard_list(request):
     flashcards = FlashCard.objects.all()
