@@ -1,5 +1,4 @@
 {% extends 'tops/base.html' %}
-{% load widget_tweaks %}
 
 {% block head %}
 {% if card_object %}
@@ -22,7 +21,7 @@
             <h6>Create a new card below</h6>     
         {% endif %}
         
-        <form method="POST" nonvalidate>
+        <form method="post" novalidate>
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">

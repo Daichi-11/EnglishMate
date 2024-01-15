@@ -105,7 +105,7 @@ def dictionary(request):
             word_def = dictionary.meaning(word_searched)
             word_def = list(word_def.values())[0][0]
     except:
-        word_def = 'This word does not exist in the database'
+        word_def = 'この言葉は辞書にありません'
 
     context = {'word_searched': word_searched, 'word_def': word_def}
     return render(request, 'flashcards/dictionary.html', context)
