@@ -1,101 +1,61 @@
-from django.shortcuts import (
-    HttpResponseRedirect,
-    get_object_or_404,
-    render
-)
 
-from .models import Card_Set, Card
-from .forms import Card_Set_Form, Card_Form
+# flashcards/views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.conf import settings
+from django.templatetags.static import static
+from django.core.exceptions import ImproperlyConfigured
+import os
+
+from .models import Deck, Flashcard
+from .forms import DeckForm, FlashcardForm
 from PyDictionary import PyDictionary
 
 
-def flashcards(request):
-    topic_query_set = Card_Set.objects.all().order_by('topic').filter(is_active=True)
-    context = {'topics': topic_query_set}
-    return render(request, 'flashcards/flashcards.html', context)
+def play_pronunciation(request, flashcard_id):
+    flashcard = get_object_or_404(Flashcard, id=flashcard_id)
+    pronunciation_path = flashcard.pronunciation.path
 
-def create_card_set(request):
+    if not os.path.isfile(pronunciation_path):
+        raise ImproperlyConfigured("Pronunciation file not found.")
+
+    with open(pronunciation_path, 'rb') as pronunciation_file:
+        response = HttpResponse(pronunciation_file.read(), content_type='audio/mpeg')
+        response['Content-Disposition'] = f'inline; filename="{flashcard.word}.mp3"'
+        return response
+    
+def deck_list(request):
+    decks = Deck.objects.all()
+    return render(request, 'flashcards/deck_list.html', {'decks': decks})
+
+def add_deck(request):
     if request.method == 'POST':
-        form = Card_Set_Form(request.POST)
-
+        form = DeckForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/flashcards/')
-
+            return redirect('deck_list')
     else:
-        form = Card_Set_Form()
+        form = DeckForm()
+    return render(request, 'flashcards/add_deck.html', {'form': form})
 
-    context = {'form': form}
-    return render(request, 'flashcards/create_card_set.html', context)
+def flashcard_list(request, deck_id):
+    deck = Deck.objects.get(id=deck_id)
+    flashcards = Flashcard.objects.filter(deck=deck)
+    return render(request, 'flashcards/flashcard_list.html', {'deck': deck, 'flashcards': flashcards})
 
-def create_card(request, card_set_id):
-    card_set_object = get_object_or_404(Card_Set, id=card_set_id)
-
+def add_flashcard(request, deck_id):
+    deck = Deck.objects.get(id=deck_id)
     if request.method == 'POST':
-        form = Card_Form(request.POST)
-
+        form = FlashcardForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/flashcards/')
-
+            flashcard = form.save(commit=False)
+            flashcard.deck = deck
+            flashcard.save()
+            return redirect('flashcard_list', deck_id=deck.id)
     else:
-        form = Card_Form(initial={'parent_card_set': card_set_object})
+        form = FlashcardForm()
+    return render(request, 'flashcards/add_flashcard.html', {'deck': deck, 'form': form})
 
-    context = {'form': form}
-    return render(request, 'flashcards/add_edit_cards.html', context)
-
-def delete_card(request, card_id):
-    card_object = get_object_or_404(Card, id=card_id)
-    card_object.delete()
-    return HttpResponseRedirect('/flashcards/')
-
-def delete_card_set(request, card_set_id):
-    card_set_object = get_object_or_404(Card_Set, id=card_set_id)
-    card_set_object.delete()
-    return HttpResponseRedirect('/flashcards/')
-
-def edit_card(request, card_id):
-    card_object = get_object_or_404(Card, id=card_id)
-
-    if request.method == 'POST':
-        form = Card_Form(request.POST, instance=card_object)
-
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/flashcards/')
-
-    else:
-        form = Card_Form(instance=card_object)
-
-    context = {'form': form, 'edit_mode': True, 'card_object': card_object}
-    return render(request, 'flashcards/add_edit_cards.html', context)
-
-def edit_card_set(request, card_set_id):
-    card_set_object = get_object_or_404(Card_Set, id=card_set_id)
-
-    if request.method == 'POST':
-        form = Card_Set_Form(request.POST, instance=card_set_object)
-
-        if form.is_valid():
-            form.save()
-        return HttpResponseRedirect('/flashcards/')
-
-    else:
-        form = Card_Set_Form(instance=card_set_object)
-
-    context = {'form': form, 'edit_mode': True, 'card_set_object': card_set_object}
-    return render(request, 'flashcards/create_card_set.html', context)
-
-def view_card_set(request, card_set_id):
-    card_set_object = get_object_or_404(Card_Set, id=card_set_id)
-    card_list = card_set_object.card_set.all()
-    card_object = card_list.first()
-
-    if request.method == 'GET' and 'card' in request.GET:
-        card_object = get_object_or_404(Card, id=request.GET['card'])
-
-    context = {'card_set_object': card_set_object, 'card_object': card_object}
-    return render(request, 'flashcards/view_cards.html', context)
 
 def dictionary(request):
     try:
@@ -105,7 +65,7 @@ def dictionary(request):
             word_def = dictionary.meaning(word_searched)
             word_def = list(word_def.values())[0][0]
     except:
-        word_def = 'この言葉は辞書にありません'
+        word_def = 'この言葉は辞書にありません/英単語を検索してください'
 
     context = {'word_searched': word_searched, 'word_def': word_def}
     return render(request, 'flashcards/dictionary.html', context)
