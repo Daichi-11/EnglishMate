@@ -1,5 +1,3 @@
-
-# flashcards/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.conf import settings
@@ -30,7 +28,7 @@ def deck_list(request):
 
 def add_deck(request):
     if request.method == 'POST':
-        form = DeckForm(request.POST)
+        form = DeckForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('deck_list')
