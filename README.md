@@ -54,12 +54,10 @@ https://englishmate.fly.dev/
 - 画像の取得 / アップロード機能
 
 
-## インフラ構成図
-
 
 ## ER図
 
+![image](https://github.com/Daichi-11/EnglishMate/assets/60164519/ca3b2c2e-9a89-4116-a25c-7baff17f8a19)
 
 
-## 画面遷移図
 
