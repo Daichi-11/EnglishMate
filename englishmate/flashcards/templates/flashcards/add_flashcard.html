@@ -1,7 +1,14 @@
 <!-- flashcards/templates/flashcards/add_flashcard.html -->
+
+{% extends 'tops/base.html' %}
+{% load static %}
+{% block content %}
+
+<a href="{% url 'add_flashcard' deck_id=deck.id %}">Add Flashcard</a>
 <h2>Add Flashcard to {{ deck.title }}</h2>
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Save</button>
 </form>
+{% endblock content %}
