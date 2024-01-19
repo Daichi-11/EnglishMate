@@ -2,11 +2,6 @@
 
 ![english](https://github.com/Daichi-11/EnglishMate/assets/60164519/554a2a2c-fbb9-4516-8627-e24d6db3e633)
 
-
-[![CI/CD](https://github.com/keynyaan/hayabusatrip-frontend/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/keynyaan/hayabusatrip-frontend/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/keynyaan/hayabusatrip-frontend/graph/badge.svg?token=LCPY7L2MHO)](https://codecov.io/gh/keynyaan/hayabusatrip-frontend)
-[![Thanks](https://img.shields.io/badge/Thank%20you-for%20visiting-00aab9)](https://www.hayabusatrip.com)
-
 ## サービス概要
 
 EnglishMateは、「英単語の勉強をもっとシンプルに効果的にしたい！」という想いから作られた、無料の英単語学習サービスです。
