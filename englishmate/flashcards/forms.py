@@ -1,15 +1,13 @@
-from django.forms import ModelForm 
+# flashcards/forms.py
 from django import forms
-from .models import Card_Set, Card
+from .models import Deck, Flashcard
 
-class Card_Set_Form(ModelForm):
+class DeckForm(forms.ModelForm):
     class Meta:
-        model = Card_Set
-        fields = ['topic', 'description']
+        model = Deck
+        fields = ['title', 'image', 'description']
 
-
-class Card_Form(ModelForm):
+class FlashcardForm(forms.ModelForm):
     class Meta:
-        model = Card
-        fields = ['parent_card_set', 'word', 'definition', 'sentences']
-
+        model = Flashcard
+        fields = ['word', 'definition', 'pronunciation', 'deck']
