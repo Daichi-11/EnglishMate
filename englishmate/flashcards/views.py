@@ -44,7 +44,7 @@ def flashcard_list(request, deck_id):
 def add_flashcard(request, deck_id):
     deck = Deck.objects.get(id=deck_id)
     if request.method == 'POST':
-        form = FlashcardForm(request.POST)
+        form = FlashcardForm(request.POST, request.FILES)
         if form.is_valid():
             flashcard = form.save(commit=False)
             flashcard.deck = deck
