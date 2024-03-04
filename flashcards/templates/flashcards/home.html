@@ -1,0 +1,80 @@
+{% extends 'flashcards/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<section class="bg-white dark:bg-gray-900 h-screen">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+    <h1 class="text-center text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-3xl dark:text-white">英語学習ガイド</h1>
+
+<div class = "grid grid-cols-2 gap-6 p-12 text-left">
+<div class="max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <a href="#">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">デッキを作る</h5>
+  </a>
+  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">デッキを作って学習を開始しよう！</p>
+  <a href="{% url 'add_deck' %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      こちらから
+      <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+      </svg>
+  </a>
+</div>
+
+<div class="max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <a href="#">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Podcastを聴こう!</h5>
+  </a>
+  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Podcastを聴いてリスニング力を伸ばそう!</p>
+  <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    こちらから
+    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+    </svg>
+</a>
+
+</div>
+
+<div class="max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <a href="#">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">学習する</h5>
+  </a>
+  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">デッキを選んで、英単語を覚えよう！</p>
+  <a href="{% url 'deck_list' %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      こちらから
+      <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+      </svg>
+  </a>
+</div>
+
+<div class="max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <a href="#">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">英語辞書</h5>
+  </a>
+  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">わからない単語はここで調べよう！</p>
+  <a href="{% url 'dictionary' %}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      こちらから
+      <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+      </svg>
+  </a>
+</div>
+</div>
+</div>
+</section>
+
+{% else %}
+<div class="hero min-h-screen" style="background-image: url(https://wallpapers.com/images/hd/4k-ultra-hd-landscape-wallpaper-m4oy1eu7dbpi527k.jpg);">
+  <div class="hero-overlay bg-opacity-50"></div>
+  <div class="hero-content text-center text-neutral-content">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">EnglishMate</h1>
+      <p class="mb-5">EnglishMateは英単語を学習して、実際にAIとスピーキングの練習ができる実践型英語サービスです。</p>
+      <a href="{% url 'login' %}" class="btn btn-primary">学習を始める！</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock content %}

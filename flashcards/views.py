@@ -10,6 +10,9 @@ from .forms import DeckForm, FlashcardForm
 from PyDictionary import PyDictionary
 
 
+def home(request):
+    return render(request, 'flashcards/home.html')
+
 def play_pronunciation(request, flashcard_id):
     flashcard = get_object_or_404(Flashcard, id=flashcard_id)
     pronunciation_path = flashcard.pronunciation.path

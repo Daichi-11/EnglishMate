@@ -41,7 +41,6 @@ CSRF_TRUSTED_ORIGINS = ["https://englishmate.fly.dev"]
 INSTALLED_APPS = [
     'flashcards',
     'accounts',
-    'tops',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
